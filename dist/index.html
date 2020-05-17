@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Getting Started</title>
+  <style>
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+    }
+
+    .container>div {
+      min-height: 100px;
+      min-width: 100px;
+      border: 1px solid #efefed;
+      margin-bottom: 12px;
+    }
+    #log {
+      position: fixed;
+      max-height: 38px;
+      border: 1px solid FFFFEE;
+      bottom: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div data-comp-name="TitleComp" data-comp-conf="{title: 'my title'}"></div>
+    <div data-comp-name="LargeBoxComp" data-comp-conf="{title: 'hello title', description: 'my title'}"></div>
+    <!-- <div data-class-def="NS.Components.Comp2" data-title="Comp2 Inst1"></div>
+    <div data-class-def="NS.Components.Comp1" data-title="Comp1 Inst2"></div>
+    <div data-class-def="NS.Components.Comp2" data-title="Comp2 Inst2"></div>
+    <div data-class-def="NS.Components.Comp1" data-title="Comp Inst1"></div>
+    <div data-class-def="NS.Components.Comp2" data-title="Comp2 Inst1"></div>
+    <div data-class-def="NS.Components.Comp1" data-title="Comp1 Inst2"></div>
+    <div data-class-def="NS.Components.Comp2" data-title="Comp2 Inst2"></div>
+    <div data-class-def="NS.Components.Comp3" data-title="Comp3 Inst1"> <H1>Component <br />3</H1> </div> -->
+  </div>
+  <div id="log"></div>
+  <script src="./src/base/main.js"></script>
+  <script src="./src/components/main.js"></script>
+  <!-- <script>
+    (function () {
+      var old = console.log;
+      var logger = document.getElementById('log');
+      console.log = function (message) {
+        if (typeof message == 'object') {
+          logger.innerHTML = (JSON && JSON.stringify ? JSON.stringify(message) : message) +'<br />' + logger.innerHTML;
+        } else {
+          logger.innerHTML = message + '<br />' + logger.innerHTML;
+        }
+      }
+    })();
+  </script> -->
+
+  <script>
+    window.addEventListener("DOMContentLoaded", function() {
+      window.controller = new NS.Controller();
+    })    
+  </script>
+</body>
+
+</html>
