@@ -2,8 +2,12 @@ export function register(name, fn) {
   Element.prototype[`__${name}`] = fn;
 }
 
-export function __el(el) {
-  return typeof el === 'string' ? document.getElementById(el) || document.querySelector(el) || document.querySelectorAll(el) : el;
+export function el(arg) {
+  return this.querySelector(arg);
+}
+
+export function els(arg) {
+  return this.querySelectorAll(arg);
 }
 
 function addClass(...args) {
@@ -76,6 +80,14 @@ function attr(key, val) {
   return this.setAttribute(key, val);
 }
 
+function addEventListener(event, callback, isCaptureMode = false) {
+  this.addEventListener(event, callback, isCaptureMode);
+}
+
+function removeEventListener(event, callback, isCaptureMode = false) {
+  this.removeEventListener(event, callback, isCaptureMode);
+}
+
 export function registerDomMethods() {
   register('addClass', addClass);
   register('removeClass', removeClass);
@@ -88,4 +100,8 @@ export function registerDomMethods() {
   register('replaceContent', replaceContent);
   register('hasClass', hasClass);
   register('attr', attr);
+  register('on', addEventListener);
+  register('off', removeEventListener);
+  register('el', el);
+  register('els', els);
 }

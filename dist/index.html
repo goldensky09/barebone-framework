@@ -27,8 +27,15 @@
 
 <body>
   <div class="container">
-    <div data-comp-name="TitleComp" data-comp-conf="{title: 'my title'}"></div>
-    <div data-comp-name="LargeBoxComp" data-comp-conf="{title: 'hello title', description: 'my title'}"></div>
+    <div data-comp-name="Login" data-comp-conf='{"name": "X", "uuid": "Y"}'>
+      <div data-comp-name="ButtonComp">
+        <button class="btn">My Button</button>
+      </div>
+    </div>    
+    <div data-comp-name="Login" data-comp-conf='{"name": "X", "uuid": "Y"}'>
+      
+    </div>    
+    <!-- <div data-comp-name="LargeBoxComp" data-comp-conf="{title: 'hello title', description: 'my title'}"></div> -->
     <!-- <div data-class-def="NS.Components.Comp2" data-title="Comp2 Inst1"></div>
     <div data-class-def="NS.Components.Comp1" data-title="Comp1 Inst2"></div>
     <div data-class-def="NS.Components.Comp2" data-title="Comp2 Inst2"></div>
@@ -39,8 +46,8 @@
     <div data-class-def="NS.Components.Comp3" data-title="Comp3 Inst1"> <H1>Component <br />3</H1> </div> -->
   </div>
   <div id="log"></div>
-  <script src="./src/base/main.js"></script>
-  <script src="./src/components/main.js"></script>
+  <!-- <script src="./src/base/main.js"></script> -->
+  <!-- <script src="./src/components/main.js"></script> -->
   <!-- <script>
     (function () {
       var old = console.log;
@@ -54,11 +61,11 @@
       }
     })();
   </script> -->
+  <script src="./src/base/main.js"></script>
+  <script src="./src/template/main.js"></script>
 
   <script>
-    window.addEventListener("DOMContentLoaded", function() {
-      window.controller = new NS.Controller();
-    })    
+      
   </script>
 </body>
 

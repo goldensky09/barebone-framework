@@ -4,8 +4,12 @@ NS.Components = {};
 import Controller from "./controller";
 import BaseComponent from "./component"
 import * as Utils from "./utils";
-import * as Service from "./utils/Service"
-NS.Controller = Controller;
+import Store from "./store"
 NS.Components.BaseComponent = BaseComponent;
 NS.Utils = Utils;
-NS.Service = Service;
+NS.store = new Store();
+
+window.addEventListener("DOMContentLoaded", function () {
+  // NS.Controller = new Controller(); // in case
+    new Controller();
+})  
