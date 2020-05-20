@@ -13,7 +13,8 @@ export default class Controller {
         compConfig = JSON.parse(compConfig);
       }
       if(NS.Components[compName] && typeof NS.Components[compName] === 'function') {
-        const instance = new NS.Components[compName](el, compConfig);
+        const compCls =  NS.Components.get(compName);
+        const instance = new compCls(el, compConfig);
         el.self = instance;
         if(compName in this.components) {
           this.components[compName].push(instance);

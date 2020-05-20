@@ -18,4 +18,4 @@ export function createSearchParams(obj) {
   return data;
 }
 
-registerDomMethods();
+registerDomMethods();//ToDo : move to controller

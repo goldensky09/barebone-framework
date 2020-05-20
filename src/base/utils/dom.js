@@ -105,3 +105,4 @@ export function registerDomMethods() {
   register('el', el);
   register('els', els);
 }
+

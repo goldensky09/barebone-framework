@@ -4,7 +4,8 @@ export default class BaseComponent extends EventEmitter {
     super();
     this.$el = $el;
     this.config = config;
-    this.bindEvents();
+    if(this.bindEvents) {
+      this.bindEvents();
+    }
   }
-  bindEvents() {}
 }

@@ -17266,10 +17266,10 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ "./src/base/component.js":
-/*!*******************************!*\
-  !*** ./src/base/component.js ***!
-  \*******************************/
+/***/ "./src/base/BaseComponent.js":
+/*!***********************************!*\
+  !*** ./src/base/BaseComponent.js ***!
+  \***********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -17280,10 +17280,6 @@ __webpack_require__.r(__webpack_exports__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -17315,18 +17311,63 @@ var BaseComponent = /*#__PURE__*/function (_EventEmitter) {
     _this.$el = $el;
     _this.config = config;
 
-    _this.bindEvents();
+    if (_this.bindEvents) {
+      _this.bindEvents();
+    }
 
     return _this;
   }
 
-  _createClass(BaseComponent, [{
-    key: "bindEvents",
-    value: function bindEvents() {}
-  }]);
-
   return BaseComponent;
 }(_utils_EventEmitter__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+
+
+/***/ }),
+
+/***/ "./src/base/Components.js":
+/*!********************************!*\
+  !*** ./src/base/Components.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Components; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Components = /*#__PURE__*/function () {
+  function Components() {
+    _classCallCheck(this, Components);
+  }
+
+  _createClass(Components, null, [{
+    key: "register",
+    value: function register(Comps) {
+      var _this = this;
+
+      if (typeof Comps === "function") {
+        _this[Comps.name] = Comps;
+      } else {
+        Object.keys(Comps).forEach(function (key) {
+          _this[Comps.name];
+        });
+      }
+    }
+  }, {
+    key: "get",
+    value: function get(key) {
+      return this[key];
+    }
+  }]);
+
+  return Components;
+}();
 
 
 
@@ -17373,7 +17414,8 @@ var Controller = /*#__PURE__*/function () {
         }
 
         if (NS.Components[compName] && typeof NS.Components[compName] === 'function') {
-          var instance = new NS.Components[compName](el, compConfig);
+          var compCls = NS.Components.get(compName);
+          var instance = new compCls(el, compConfig);
           el.self = instance;
 
           if (compName in _this.components) {
@@ -17403,21 +17445,24 @@ var Controller = /*#__PURE__*/function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _controller__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./controller */ "./src/base/controller.js");
-/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./component */ "./src/base/component.js");
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utils */ "./src/base/utils/index.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store */ "./src/base/store.js");
+/* harmony import */ var _Components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Components */ "./src/base/Components.js");
+/* harmony import */ var _BaseComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./BaseComponent */ "./src/base/BaseComponent.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utils */ "./src/base/utils/index.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./store */ "./src/base/store.js");
 var NS = {};
-window.NS = NS;
-NS.Components = {};
+window.NS = NS; // NS.Components = {};
 
 
 
 
-NS.Components.BaseComponent = _component__WEBPACK_IMPORTED_MODULE_1__["default"];
-NS.Utils = _utils__WEBPACK_IMPORTED_MODULE_2__;
-NS.store = new _store__WEBPACK_IMPORTED_MODULE_3__["default"]();
+
+ // NS.Components.BaseComponent = BaseComponent;
+
+_Components__WEBPACK_IMPORTED_MODULE_1__["default"].register(_BaseComponent__WEBPACK_IMPORTED_MODULE_2__["default"]);
+NS.Components = _Components__WEBPACK_IMPORTED_MODULE_1__["default"];
+NS.Utils = _utils__WEBPACK_IMPORTED_MODULE_3__;
+NS.store = new _store__WEBPACK_IMPORTED_MODULE_4__["default"]();
 window.addEventListener("DOMContentLoaded", function () {
-  // NS.Controller = new Controller(); // in case
   new _controller__WEBPACK_IMPORTED_MODULE_0__["default"]();
 });
 
@@ -17441,54 +17486,79 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _classPrivateFieldLooseBase(receiver, privateKey) { if (!Object.prototype.hasOwnProperty.call(receiver, privateKey)) { throw new TypeError("attempted to use private field on non-instance"); } return receiver; }
 
-var __store = {};
-var __callbacks = {};
+var id = 0;
 
-var onChange = function onChange(key, value, oldValue) {
-  var callbacks = Object(lodash__WEBPACK_IMPORTED_MODULE_0__["get"])(__callbacks, key);
+function _classPrivateFieldLooseKey(name) { return "__private_" + id++ + "_" + name; }
 
-  if (callbacks && callbacks.length) {
-    callbacks.forEach(function (callaback) {
-      if (typeof callaback === "function") {
-        callaback(value, oldValue);
-      }
-    });
-  }
-};
+
 
 var Store = /*#__PURE__*/function () {
   function Store() {
+    var obj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
     _classCallCheck(this, Store);
+
+    Object.defineProperty(this, _onChange, {
+      value: _onChange2
+    });
+    Object.defineProperty(this, _store, {
+      writable: true,
+      value: {}
+    });
+    Object.defineProperty(this, _callbacks, {
+      writable: true,
+      value: {}
+    });
+    _classPrivateFieldLooseBase(this, _store)[_store] = obj;
   }
 
   _createClass(Store, [{
     key: "subscribe",
     value: function subscribe(key, callback) {
-      if (__callbacks[key]) {
-        __callbacks[key].push(callback);
+      if (_classPrivateFieldLooseBase(this, _callbacks)[_callbacks][key]) {
+        _classPrivateFieldLooseBase(this, _callbacks)[_callbacks][key].push(callback);
       } else {
-        __callbacks[key] = [callback];
+        _classPrivateFieldLooseBase(this, _callbacks)[_callbacks][key] = [callback];
       }
     }
   }, {
     key: "get",
     value: function get(key) {
-      return Object(lodash__WEBPACK_IMPORTED_MODULE_0__["get"])(__store, "key");
+      return Object(lodash__WEBPACK_IMPORTED_MODULE_0__["get"])(_classPrivateFieldLooseBase(this, _store)[_store], "key");
     }
   }, {
     key: "set",
     value: function set(key, value) {
       var tmpOldVal = Object(lodash__WEBPACK_IMPORTED_MODULE_0__["get"])(key);
 
-      Object(lodash__WEBPACK_IMPORTED_MODULE_0__["set"])(__store, key, value);
+      Object(lodash__WEBPACK_IMPORTED_MODULE_0__["set"])(_classPrivateFieldLooseBase(this, _store)[_store], key, value);
 
-      onChange(key, value, tmpOldVal);
+      _classPrivateFieldLooseBase(this, _onChange)[_onChange](key, value, tmpOldVal);
     }
   }]);
 
   return Store;
 }();
+
+var _store = _classPrivateFieldLooseKey("__store");
+
+var _callbacks = _classPrivateFieldLooseKey("__callbacks");
+
+var _onChange = _classPrivateFieldLooseKey("onChange");
+
+var _onChange2 = function _onChange2(key, value, oldValue) {
+  var callbacks = Object(lodash__WEBPACK_IMPORTED_MODULE_0__["get"])(_classPrivateFieldLooseBase(this, _callbacks)[_callbacks], key);
+
+  if (callbacks && callbacks.length) {
+    callbacks.forEach(function (callback) {
+      if (typeof callback === "function") {
+        callback(value, oldValue);
+      }
+    });
+  }
+};
 
 
 
@@ -17784,7 +17854,7 @@ function createSearchParams(obj) {
   });
   return data;
 }
-Object(_dom__WEBPACK_IMPORTED_MODULE_0__["registerDomMethods"])();
+Object(_dom__WEBPACK_IMPORTED_MODULE_0__["registerDomMethods"])(); //ToDo : move to controller
 
 /***/ })
 

@@ -1,15 +1,19 @@
 const NS = {};
 window.NS = NS;
-NS.Components = {};
+// NS.Components = {};
 import Controller from "./controller";
-import BaseComponent from "./component"
+import Components from  "./Components"
+import BaseComponent from "./BaseComponent"
 import * as Utils from "./utils";
 import Store from "./store"
-NS.Components.BaseComponent = BaseComponent;
+// NS.Components.BaseComponent = BaseComponent;
+
+Components.register(BaseComponent);
+
+NS.Components = Components
 NS.Utils = Utils;
 NS.store = new Store();
 
 window.addEventListener("DOMContentLoaded", function () {
-  // NS.Controller = new Controller(); // in case
     new Controller();
 })  

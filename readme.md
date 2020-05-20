@@ -13,7 +13,7 @@
 3. Linting Tool: ES Lint
 4. Testing: Jest
 5. Beautiifer: Prettier
-6. Package Manager: NPM
+6. Package Manager: NPM / PNPMN
 7. Output Dist: ES5
 
 
@@ -32,3 +32,8 @@ utils
 components:
   comp1:
     -- index.js (NS.Components.Comp1) extend from NS.Components.BaseComponent
+
+
+Feedback - Create a static class Components to get and set for component [get, register(single/multiple), getAll(optional)]
+
+        - Introd
